@@ -20,15 +20,13 @@ class IndexView(View):
 User 1: <input type="text" name="name1"><br>
 <input type="submit" value="Submit">
 </form>
-
+{{ artists }}
 </body>
 </html>
 """)
 
-        user1 = ArtistParser('rumcajsss')
-        user2 = ArtistParser('msitake')
-        #context1=Context(ArtistParser.download('rumcajsss'))
-        #return HttpResponse(template.render(context1))
+        context1=Context(ArtistParser.downloadArtists('name1'))
+        return HttpResponse(template.render(context1))
         #return HttpResponse(name1)
         #print (ArtistParser.download('rumcajsss'))
         
