@@ -17,7 +17,7 @@ class ArtistParser:
 		resultdict = json.loads(result.content.decode("utf-8"))
 		regx = re.compile('\'name\': \'(\w*\s?\/?\w*-?\s?\w*\s?\w*)\'')
 		artists = regx.findall(str(resultdict))
-		return render(artists)
+		return artists
 
 	def downloadPlaycount(name):
 		parameters = {'method' : 'user.gettopartists', 'user': name, 'api_key': ArtistParser.API_KEY, 'format' : 'json'}

@@ -9,24 +9,35 @@ from app.artists import Compare
 class IndexView(View):
     def get(self, request, *args, **kwargs):
         name1=request.GET.get('name1','rumcajsss')
-        #name2=request.GET.get('name2','rumcajsss')
+        name2=request.GET.get('name2','msitake')
         template=Template("""
 <html>
 <head>
+<link rel="stylesheet" href="stylesheet.css"/>
 <title>Comparision of top artists of two given users.</title>
 </head>
 <body>
 <form>{% csrf_token %}
 User 1: <input type="text" name="name1"><br>
+User 2: <input type="text" name="name2"><br>
 <input type="submit" value="Submit">
 </form>
-{{ artists }}
+{% for artist in artists2 %}
+<h2>
+    {{ artist }}
+
+</h2>
+{% endfor %}
 </body>
 </html>
 """)
-
-        context1=Context(ArtistParser.downloadArtists('name1'))
-        return HttpResponse(template.render(context1))
+        artists_list_1 = ArtistParser.downloadArtists(name1)
+        artists_list_2 = ArtistParser.downloadArtists(name2)
+        #print (artists_list)
+        # context1=Context(ArtistParser.downloadArtists(name1))
+        context1=Context({"artists1": artists_list_1})
+        context2=Context({"artists2": artists_list_2})
+        return HttpResponse(template.render(context2))
         #return HttpResponse(name1)
         #print (ArtistParser.download('rumcajsss'))
         
@@ -35,5 +46,5 @@ User 1: <input type="text" name="name1"><br>
         
         #zmienna = Compare.checkCommon(ArtistParser.downloadArtists('rumcajsss'),
          #   ArtistParser.downloadArtists('msitake'))
-        return HttpResponse(ArtistParser.downloadArtists('rumcajsss'))
+        #return HttpResponse(ArtistParser.downloadArtists('rumcajsss'))
         #return HttpResponse(zmienna)

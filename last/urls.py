@@ -11,4 +11,6 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', app.views.IndexView.as_view(), name='index'),
-)
+ )
+urlpatterns += patterns('',
+    (r'^(?P<path>.*)$', 'django.views.static.serve', ))
