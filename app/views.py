@@ -34,10 +34,12 @@ User 2: <input type="text" name="name2"><br>
         artists_list_1 = ArtistParser.downloadArtists(name1)
         artists_list_2 = ArtistParser.downloadArtists(name2)
         #print (artists_list)
+        common_artists =  Compare.checkCommon(artists_list_1, artists_list_2)
         # context1=Context(ArtistParser.downloadArtists(name1))
         context1=Context({"artists1": artists_list_1})
         context2=Context({"artists2": artists_list_2})
-        return HttpResponse(template.render(context2))
+        #return HttpResponse(template.render(context2))
+        return HttpResponse({"artists2" : common_artists})
         #return HttpResponse(name1)
         #print (ArtistParser.download('rumcajsss'))
         
